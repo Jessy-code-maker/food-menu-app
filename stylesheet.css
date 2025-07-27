@@ -116,7 +116,7 @@ header h1 {
 /*BUTTONS*/
 .hero-btn {
  display: flex;
- align-items: center;
+ justify-content: space-evenly;
  padding: 10px;
 }
 
@@ -211,8 +211,6 @@ a:focus-visible {
 
 .hero-content {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   flex-wrap: wrap; /*for small screens */
 }
 
@@ -285,24 +283,22 @@ a:focus-visible {
 .f-container {
   display: flex;
   flex-direction:row;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-wrap: wrap;
-  gap: 40px;
-  padding: 50px;
+  padding: 20px;
 }
 
 .f-1, .f-2, .f-3 {
   display: flex;
   border: 2px solid var(--neutral-dark);
-  height: 300px;
+  height: auto;
   flex-direction: column;
   justify-content: center;
   border-radius: 50px;
   background-color: var(--fresh-green);
   text-align: center;
-  padding: 50px;
-  max-width: 420px;
-  width: 100%;
+  padding: 40px;
+  max-width: 240px; /*for large screen*/
   flex-grow: 1;
 }
 
@@ -638,7 +634,12 @@ footer {
   }
 
   .f-container {
-    gap: 40px;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .f-1, .f-2, .f-3 {
+    max-width: fit-content;
   }
 
  .plate1 {
@@ -679,10 +680,12 @@ footer {
 }
 
 @media screen and (max-width: 581px) {
+  .hero {
+    padding: 1rem 2rem;
+  }
   .f-container {
     flex-direction: column;
     gap: 30px;
-    padding: 20px;
   }
 
   .f-1, .f-2, .f-3 {
