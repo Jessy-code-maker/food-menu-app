@@ -347,8 +347,8 @@ a:focus-visible {
 
 .filter-bar {
   display: none;
-  text-align: center;
-  margin-bottom: 1rem;
+  text-align: start;
+  margin: 1rem 0 1rem 4rem;
 }
 .category-nav button {
   background:var(--fresh-green);
@@ -609,9 +609,9 @@ footer {
     padding: 1.25rem;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     border-bottom: 1px solid #ddd;
-    border-radius: 0.5rem;
+    border-radius: 0.2rem 0.2rem 1rem 1rem;
+    left:0;
   }
-
 
   .hamburger {
     display: block;
@@ -621,13 +621,11 @@ footer {
     gap: 40px;
   }
 
-
   .plate {
     display: none;
     position: static;
     animation: none;
   }
-
 
   .plate3 {
     display: block;
@@ -660,7 +658,7 @@ footer {
   }
 
   .filter-bar {
-    display: block;
+    display: block; 
   }
     
   .filter-bar select {
