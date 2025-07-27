@@ -731,18 +731,6 @@ footer {
 }
 
 @media screen and (max-width: 581px) {
-  .hero {
-    padding: 1rem 2rem;
-  }
-  .f-container {
-    flex-direction: column;
-    gap: 30px;
-  }
-
-  .f-1, .f-2, .f-3 {
-    width: 100%;
-  }
-
   .main-container {
     flex-direction: column;
     padding: 40px;
@@ -771,7 +759,7 @@ footer {
     padding: 14px;
   }
 
-    .plate {
+  .plate {
     display: none;
     position: static;
     animation: none;
