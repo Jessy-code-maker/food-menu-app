@@ -728,8 +728,6 @@ footer {
     left: 50%;
     transform: translateX(-50%);
   }
-
-
 }
 
 @media screen and (max-width: 581px) {
