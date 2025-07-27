@@ -1,23 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Restaurant Order Checkout</title>
-  <link rel="stylesheet" href="stylesheet.css">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-</head>
-<div id="loading-spinner" style="display: none;">
-  <div class="spinner"></div>
-</div>
-
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurant Order Checkout</title>
+    <link rel="stylesheet" href="stylesheet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  </head>
+  <body>
+      <div id="loading-spinner" style="display: none">
+    <div class="spinner"></div>
+  </div>
     <div class="header-wrapper">
       <header>
         <div class="logo"><h1>Ntachiosa</h1></div>
         <input type="checkbox" class="menu-toggle" id="menu-toggle" />
-        <label
-          for="menu-toggle"
+        <label for="menu-toggle"
           class="hamburger"
           aria-label="Toggle navigation menu"
           ><span></span><span></span><span></span
@@ -25,162 +23,223 @@
         <nav class="nav-items" role="navigation" aria-label="Main navigation">
           <a href="index.html">Home</a>
           <a href="order.html">Services</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
+          <a href="index.html">About</a>
+          <a href="index.html">Contact</a>
           <a href="#resources">Resources</a>
         </nav>
       </header>
     </div>
 
-
-<h1>Restaurant Menu</h1>
-
-<!-- Responsive Dropdown Filter for Small Screens -->
-<div class="filter-bar">
-  <label for="category-select">Choose a category:</label>
-  <select id="category-select">
-    <option value="all">All</option>
-    <option value="soup">Soups</option>
-    <option value="rice">Rice Dishes</option>
-    <option value="grilled">Grilled</option>
-    <option value="swallow">Swallow & Soups</option>
-  </select>
-</div>
-
-
-  <!-- CATEGORY NAVIGATION -->
-<div class="category-nav">
-  <button class="active" data-category="all">All</button>
-  <button data-category="soup">Soups</button>
-  <button data-category="rice">Rice Dishes</button>
-  <button data-category="grilled">Grilled</button>
-  <button data-category="swallow">Swallow & Soups</button>
-</div>
-
- <!-- MENU ITEMS -->
-<div class="main-container">
-  <!-- Menu Section -->
-  <div class="d-container">
-    <div class="dish" data-category="soup">
-      <img src="pepper_soup.jpg" alt="Pepper Soup">
-      <h3>Pepper Soup</h3>
-      <p>Assorted Meat</p>
-      <p>Price: ₦4500.00</p>
-      <button class="dish-button" onclick="addToOrder('Pepper Soup', 8, 'pepper_soup.jpg')">Add to Plate</button>
+    <h1>Restaurant Menu</h1>
+    
+    <!-- CATEGORY NAVIGATION -->
+    <!-- Responsive Dropdown Filter for Small Screens -->
+    <div class="filter-bar">
+      <label for="category-select">Choose a category:</label>
+      <select id="category-select">
+        <option value="all">All</option>
+        <option value="soup">Soups</option>
+        <option value="rice">Rice Dishes</option>
+        <option value="grilled">Grilled</option>
+        <option value="swallow">Swallow & Soups</option>
+      </select>
     </div>
-    <div class="dish" data-category="grilled">
-      <img src="suya.jpg" alt="Suya">
-      <h3>Suya</h3>
-      <p>Spicy grilled beef</p>
-      <p>Price: ₦3000.00</p>
-      <button class="dish-button" onclick="addToOrder('Suya', 10, 'suya.jpg')">Add to Plate</button>
+    <!-- Responsive button Filter for Large Screens -->
+    <div class="category-nav">
+      <button class="active" data-category="all">All</button>
+      <button data-category="soup">Soups</button>
+      <button data-category="rice">Rice Dishes</button>
+      <button data-category="grilled">Grilled</button>
+      <button data-category="swallow">Swallow & Soups</button>
     </div>
-    <div class="dish" data-category="rice">
-      <img src="rice and beans.jpg" alt="Rice and Beans">
-      <h3>Rice & Beans</h3>
-      <p>With fried plantain</p>
-      <p>Price: ₦2550.50</p>
-      <button class="dish-button" onclick="addToOrder('Rice & Beans', 7.5, 'rice and beans.jpg')">Add to Plate</button>
-    </div>
-    <div class="dish" data-category="rice">
-      <img src="White-Rice-Stew.jpg" alt="White Rice & Stew">
-      <h3>White Rice & Stew</h3>
-      <p>With beef stew</p>
-      <p>Price: ₦3000.00</p>
-      <button class="dish-button" onclick="addToOrder('White Rice & Stew', 7, 'White-Rice-Stew.jpg')">Add to Plate</button>
-    </div>
-    <div class="dish" data-category="rice">
-      <img src="jollof_rice.jpg" alt="Jollof Rice">
-      <h3>Jollof Rice</h3>
-      <p>Classic party style</p>
-      <p>Price: ₦2800.00</p>
-      <button class="dish-button" onclick="addToOrder('Jollof Rice', 9, 'jollof_rice.jpg')">Add to Plate</button>
-    </div>
-    <div class="dish" data-category="swallow">
-      <img src="Egusi.jpg" alt="Egusi Soup">
-      <h3>Egusi Soup</h3>
-      <p>With pounded yam</p>
-      <p>Price: ₦2500.00</p>
-      <button class="dish-button" onclick="addToOrder('Egusi Soup', 11, 'Egusi.jpg')">Add to Plate</button>
-    </div>
-  </div>
 
-  <!-- Checkout Section -->
-  <div class="c-container">
-    <h2>Checkout</h2>
-      <div id="checkout-content">
-    <div id="checkout"></div>
-    <div class="totals">
-      <p><strong>Subtotal:</strong> ₦<span id="subtotal">0.00</span></p>
-      <p><strong>Discount (10%):</strong> ₦<span id="discount">0.00</span></p>
-      <p><strong>Total:</strong> ₦<span id="total">0.00</span></p>
-    </div>
-    <h2>Payment Details</h2>
+    <!-- MENU ITEMS -->
+    <div class="main-container">
+      <div class="d-container">
+        <div class="dish" data-category="soup">
+          <img src="pepper_soup.jpg" alt="Pepper Soup" />
+          <h3>Pepper Soup</h3>
+          <p>Assorted Meat</p>
+          <p>Price: ₦4500.00</p>
+          <button class="dish-button"
+            onclick="addToOrder('Pepper Soup', 8, 'pepper_soup.jpg')">
+            Add to Plate
+          </button>
+        </div>
+        <div class="dish" data-category="grilled">
+          <img src="suya.jpg" alt="Suya" />
+          <h3>Suya</h3>
+          <p>Spicy grilled beef</p>
+          <p>Price: ₦3000.00</p>
+          <button
+            class="dish-button"
+            onclick="addToOrder('Suya', 10, 'suya.jpg')">
+            Add to Plate
+          </button>
+        </div>
+        <div class="dish" data-category="rice">
+          <img src="rice and beans.jpg" alt="Rice and Beans" />
+          <h3>Rice & Beans</h3>
+          <p>With fried plantain</p>
+          <p>Price: ₦2550.50</p>
+          <button
+            class="dish-button"
+            onclick="addToOrder('Rice & Beans', 7.5, 'rice and beans.jpg')">
+            Add to Plate
+          </button>
+        </div>
+        <div class="dish" data-category="rice">
+          <img src="White-Rice-Stew.jpg" alt="White Rice & Stew" />
+          <h3>White Rice & Stew</h3>
+          <p>With beef stew</p>
+          <p>Price: ₦3000.00</p>
+          <button
+            class="dish-button"
+            onclick="addToOrder('White Rice & Stew', 7, 'White-Rice-Stew.jpg')">
+            Add to Plate
+          </button>
+        </div>
+        <div class="dish" data-category="rice">
+          <img src="jollof_rice.jpg" alt="Jollof Rice" />
+          <h3>Jollof Rice</h3>
+          <p>Classic party style</p>
+          <p>Price: ₦2800.00</p>
+          <button
+            class="dish-button"
+            onclick="addToOrder('Jollof Rice', 9, 'jollof_rice.jpg')">
+            Add to Plate
+          </button>
+        </div>
+        <div class="dish" data-category="swallow">
+          <img src="Egusi.jpg" alt="Egusi Soup" />
+          <h3>Egusi Soup</h3>
+          <p>With pounded yam</p>
+          <p>Price: ₦2500.00</p>
+          <button
+            class="dish-button"
+            onclick="addToOrder('Egusi Soup', 11, 'Egusi.jpg')">
+            Add to Plate
+          </button>
+        </div>
+      </div>
 
-<form id="payment-form" onsubmit="return submitPayment(event)">
-  <label for="customer-name">Customer Name:</label><br>
-  <input type="text" id="customer-name" name="customer-name" required><br><br>
+      <!-- Checkout Section -->
+      <div class="c-container">
+        <h2>Checkout</h2>
+        <div id="checkout-content">
+          <div id="checkout"></div>
+          <div class="totals">
+            <p><strong>Subtotal:</strong> ₦<span id="subtotal">0.00</span></p>
+            <p>
+              <strong>Discount (10%):</strong> ₦<span id="discount">0.00</span>
+            </p>
+            <p><strong>Total:</strong> ₦<span id="total">0.00</span></p>
+          </div>
+          <h2>Payment Details</h2>
 
-  <label for="payment-method">Select Payment Method:</label><br>
-  <select id="payment-method" name="payment-method" onchange="toggleCardFields()" required>
-    <option value="">--Select--</option>
-    <option value="card">Credit / Debit Card</option>
-    <option value="cash">Cash</option>
-    <option value="mobile">Mobile Payment</option>
-  </select><br><br>
+          <form id="payment-form" onsubmit="return submitPayment(event)">
+            <label for="customer-name">Customer Name:</label><br />
+            <input
+              type="text"
+              id="customer-name"
+              name="customer-name"
+              required
+            /><br /><br />
 
-  <div id="card-fields" style="display: none;">
-    <label for="card-number">Card Number:</label><br>
-    <input type="text" id="card-number" name="card-number" maxlength="16"><br><br>
+            <label for="payment-method">Select Payment Method:</label><br />
+            <select
+              id="payment-method"
+              name="payment-method"
+              onchange="toggleCardFields()"
+              required>
+              <option value="">--Select--</option>
+              <option value="card">Credit / Debit Card</option>
+              <option value="cash">Cash</option>
+              <option value="mobile">Mobile Payment</option></select
+            ><br /><br />
 
-    <label for="expiry">Expiry Date:</label><br>
-    <input type="month" id="expiry" name="expiry"><br><br>
+            <div id="card-fields" style="display: none">
+              <label for="card-number">Card Number:</label><br />
+              <input
+                type="text"
+                id="card-number"
+                name="card-number"
+                maxlength="16"
+              /><br /><br />
 
-    <label for="cvv">CVV:</label><br>
-    <input type="password" id="cvv" name="cvv" maxlength="4"><br><br>
-  </div>
+              <label for="expiry">Expiry Date:</label><br />
+              <input type="month" id="expiry" name="expiry" /><br /><br />
 
-  <button class="order-btn" type="submit">Pay Now</button>
-</form>
-<button class="order-btn" onclick="startNewOrder()">➕ Start New Order</button>
-</div>
-  </div>
-
-</div>
-<!-- Receipt Modal -->
-<div id="receipt-modal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn" onclick="closeModal()">&times;</span>
-    <div id="receipt-preview">
-      <!-- Receipt content will be injected here -->
-    </div>
-    <button onclick="printReceipt()">🖨️ Print Receipt</button>
-  </div>
-</div>
-    <footer>
-  <div class="footer-container">
-    <p>&copy; 2025 Anusi Jacinta. All rights reserved.</p>
-
-    <div id="contact" class="contact-info">
-      <p>Contact: <a href="mailto:info@ntachiosa.com">info@ntachiosa.com</a></p>
-
-      <div class="social-links">
-        <a href="https://facebook.com/Ntachiosa" target="_blank" aria-label="Facebook">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="https://twitter.com/Ntachiosa" target="_blank" aria-label="Twitter">
-          <i class="fab fa-twitter"></i>
-        </a>
-        <a href="https://instagram.com/Ntachiosa" target="_blank" aria-label="Instagram">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://wa.me/2348000000000" target="_blank" aria-label="WhatsApp">
-          <i class="fab fa-whatsapp"></i>
-        </a>
+              <label for="cvv">CVV:</label><br />
+              <input
+                type="password"
+                id="cvv"
+                name="cvv"
+                maxlength="4"
+              /><br /><br />
+            </div>
+            <p>
+              <strong>Estimated Delivery Time:</strong>
+              <span id="estimated-time"></span>
+            </p>
+            <button class="order-btn" type="submit">Pay Now</button>
+          </form>
+          <button class="order-btn" onclick="startNewOrder()">
+            ➕ Start New Order
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-</footer>
-<script src="script.js"></script>
-</body>
+
+    <!-- Receipt Modal -->
+    <div id="receipt-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <div id="receipt-preview">
+          <!-- Receipt content will be injected here -->
+        </div>
+        <button onclick="printReceipt()">🖨️ Print Receipt</button>
+      </div>
+    </div>
+    </main>
+    <footer>
+      <div class="footer-container">
+        <p>&copy; 2025 Anusi Jacinta. All rights reserved.</p>
+
+        <div id="contact" class="contact-info">
+          <p>
+            Contact: <a href="mailto:info@ntachiosa.com">info@ntachiosa.com</a>
+          </p>
+
+          <div class="social-links">
+            <a
+              href="https://facebook.com/Ntachiosa"
+              target="_blank"
+              aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a
+              href="https://twitter.com/Ntachiosa"
+              target="_blank"
+              aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a
+              href="https://instagram.com/Ntachiosa"
+              target="_blank"
+              aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a
+              href="https://wa.me/2348000000000"
+              target="_blank"
+              aria-label="WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
 </html>

@@ -1,49 +1,41 @@
 //handle the navigation menu toggle for mobile view
-// Select the checkbox and nav menu
-const menuToggle = document.getElementById('menu-toggle');
-const navItems = document.querySelector('.nav-items');
+const menuToggle = document.getElementById("menu-toggle");
+const navItems = document.querySelector(".nav-items");
 
-menuToggle.addEventListener('change', () => {
+menuToggle.addEventListener("change", () => {
   if (menuToggle.checked) {
-    navItems.style.display = 'flex';
+    navItems.style.display = "flex";
   } else {
-    navItems.style.display = 'none';
+    navItems.style.display = "none";
   }
 });
 
-//used to manage the order functionality of a restaurant menu app
 // This script handles adding items to the order, updating quantities, and submitting payment
-  let cart = {};
+let cart = {};
 
-  function addToOrder(name, price, image) {
-    if (!cart[name]) {
-      cart[name] = { price, quantity: 1, image };
-    } else {
-      cart[name].quantity += 1;
+function addToOrder(name, price, image) {
+  if (!cart[name]) {
+    cart[name] = { price, quantity: 1, image };
+  } else {
+    cart[name].quantity += 1;
+  }
+  renderCart();
+  localStorage.setItem("cartItems", JSON.stringify(cart)); // Save order to localStorage
+}
+
+// Change quantity of items in the cart
+// This function updates the quantity of an item in the cart, or removes it if the quantity goes to zero
+// It also re-renders the cart and updates the localStorage
+function changeQuantity(name, amount) {
+  if (cart[name]) {
+    cart[name].quantity += amount;
+    if (cart[name].quantity <= 0) {
+      delete cart[name];
     }
     renderCart();
-      localStorage.setItem('cartItems', JSON.stringify(cart)); // Save order to localStorage
-
+    localStorage.setItem("cartItems", JSON.stringify(cart)); // Update order in localStorage
   }
-
-  // Change quantity of items in the cart
-  // This function updates the quantity of an item in the cart, or removes it if the quantity goes to zero
-  // It also re-renders the cart and updates the localStorage
-  // This function changes the quantity of an item in the cart
-  // It takes the item name and the amount to change (positive or negative) 
-  // If the quantity goes to zero, it removes the item from the cart
-  // It also updates the cart display and localStorage
-  function changeQuantity(name, amount) {
-    if (cart[name]) {
-      cart[name].quantity += amount;
-      if (cart[name].quantity <= 0) {
-        delete cart[name];
-      }
-      renderCart();
-      localStorage.setItem('cartItems', JSON.stringify(cart)); // Update order in localStorage
-    }
-  }
-
+}
 
 function renderCart() {
   const checkout = document.getElementById("checkout");
@@ -83,10 +75,10 @@ function renderCart() {
     checkout.appendChild(div);
   }
 
-  // 👇 Conditional Discount
+  // Conditional Discount
   let discount = 0;
   if (subtotal >= 50) {
-    discount = subtotal * 0.10;
+    discount = subtotal * 0.1;
   }
 
   const total = subtotal - discount;
@@ -96,41 +88,43 @@ function renderCart() {
   document.getElementById("total").textContent = total.toFixed(2);
 }
 
-
-  function toggleCardFields() {
-    const method = document.getElementById("payment-method").value;
-    const cardSection = document.getElementById("card-fields");
-    cardSection.style.display = method === "card" ? "block" : "none";
-  }
-
-
+function toggleCardFields() {
+  const method = document.getElementById("payment-method").value;
+  const cardSection = document.getElementById("card-fields");
+  cardSection.style.display = method === "card" ? "block" : "none";
+}
 
 // Payment form handling
 // This function handles the payment form submission, validates input, and displays a receipt
-  function submitPayment(event) {
-    event.preventDefault();
+function submitPayment(event) {
+  event.preventDefault();
 
-     document.getElementById("loading-spinner").style.display = "flex";
+  document.getElementById("loading-spinner").style.display = "flex";
 
-    const name = document.getElementById("customer-name").value;
-    const method = document.getElementById("payment-method").value;
+  const name = document.getElementById("customer-name").value;
+  const method = document.getElementById("payment-method").value;
 
-    if (!name || !method) {
-      alert("Please fill out all required fields.");
-      document.getElementById("loading-spinner").style.display = "none";
-      return false;
-    }
-// Simulate a delay for payment processing
-    // This simulates a delay for payment processing, allowing the loading spinner to be visible
-    setTimeout(() => {
+  if (!name || !method) {
+    alert("Please fill out all required fields.");
+    document.getElementById("loading-spinner").style.display = "none";
+    return false;
+  }
+
+  // Simulate a delay for payment processing
+  // This simulates a delay for payment processing, allowing the loading spinner to be visible
+  setTimeout(() => {
     alert(`Thank you, ${name}! Your payment via ${method} was submitted.`);
-     document.getElementById("loading-spinner").style.display = "none";
+    document.getElementById("loading-spinner").style.display = "none";
     // Prepare receipt HTML
     // This function generates a receipt based on the current cart items and payment method
     // It displays the receipt in the checkout content area and allows printing or starting a new order
-    // const checkoutContent = document.getElementById("checkout-content");
     const now = new Date();
     const receiptTime = now.toLocaleString();
+    const estimatedDelivery = new Date(now.getTime() + 45 * 60000); // 45 minutes from now
+    const deliveryTime = estimatedDelivery.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
     let subtotal = 0;
     let receiptItems = "";
 
@@ -151,11 +145,12 @@ function renderCart() {
     const discount = subtotal >= 50 ? subtotal * 0.1 : 0;
     const total = subtotal - discount;
 
-     const receiptHtml = `
+    const receiptHtml = `
       <h3>Receipt</h3>
       <p><strong>Customer:</strong> ${name}</p>
       <p><strong>Payment Method:</strong> ${method}</p>
       <p><strong>Date:</strong> ${receiptTime}</p>
+      <p><strong>Delivery Time:</strong> ${deliveryTime}</p>
       <table style="width: 100%; border-collapse: collapse;" border="1">
         <thead>
           <tr><th>Item</th><th>Qty</th><th>Price</th><th>Total</th></tr>
@@ -167,7 +162,6 @@ function renderCart() {
       <p><strong>Total Paid:</strong> ₦${total.toFixed(2)}</p>
     `;
 
-    
     document.getElementById("receipt-preview").innerHTML = receiptHtml;
     showModal();
 
@@ -177,7 +171,7 @@ function renderCart() {
     toggleCardFields();
     cart = {};
     renderCart();
-    localStorage.removeItem('cartItems');
+    localStorage.removeItem("cartItems");
   }, 1000);
 }
 
@@ -193,82 +187,62 @@ function printReceipt() {
   window.print();
 }
 
-
-
-  // Start a new order
-  // This function resets the cart and form, allowing the user to start a new order
-   function startNewOrder() {
-  cart = {};
-  renderCart();
-   document.getElementById("payment-form").reset();
-   toggleCardFields();
-  localStorage.removeItem('cartItems');
- }
-
-
-// Automatically attach print and close logic
-setTimeout(() => {
-  document.getElementById("printBtn").addEventListener("click", () => {
-    window.print();
-    setTimeout(() => {
-      window.open('', '_self').close();
-    }, 500); // Give print a moment before closing
-  });
-}, 100);
-
-
 //category filtering
 function showCategory(category, event) {
-  const dishes = document.querySelectorAll('.dish');
-  const buttons = document.querySelectorAll('.category-nav button');
+  const dishes = document.querySelectorAll(".dish");
+  const buttons = document.querySelectorAll(".category-nav button");
 
-  dishes.forEach(dish => {
-    dish.style.display = (category === 'all' || dish.getAttribute('data-category') === category) ? 'block' : 'none';
+  dishes.forEach((dish) => {
+    dish.style.display =
+      category === "all" || dish.getAttribute("data-category") === category
+        ? "block"
+        : "none";
   });
 
-  buttons.forEach(btn => btn.classList.remove('active'));
+  buttons.forEach((btn) => btn.classList.remove("active"));
 
   if (event && event.target) {
-    event.target.classList.add('active');
+    event.target.classList.add("active");
   }
 }
 
- window.onload = function() {
-  const saved = localStorage.getItem('cartItems');
+window.onload = function () {
+  const saved = localStorage.getItem("cartItems");
   if (saved) {
     cart = JSON.parse(saved);
     renderCart();
   }
-};   
-
+};
 
 // Filter dishes by category
-  function filterDishes() {
-       const selectedCategory = document.getElementById("category-select").value;
-      const dishes = document.querySelectorAll('.dish');
-       dishes.forEach(dish => {
-         const category = dish.getAttribute('data-category');
-        dish.style.display = (selectedCategory === 'all' || category === selectedCategory)
-           ? 'block' : 'none';
-      });
-     }
+function filterDishes() {
+  const selectedCategory = document.getElementById("category-select").value;
+  const dishes = document.querySelectorAll(".dish");
+  dishes.forEach((dish) => {
+    const category = dish.getAttribute("data-category");
+    dish.style.display =
+      selectedCategory === "all" || category === selectedCategory
+        ? "block"
+        : "none";
+  });
+}
 // Setup responsive filter for small screens
- function setupResponsiveFilter() {
+function setupResponsiveFilter() {
   const categorySelect = document.getElementById("category-select");
   if (!categorySelect) return; // Exit if no select element found
 
-  const mediaQuery = window.matchMedia('(max-width: 768px)');
+  const mediaQuery = window.matchMedia("(max-width: 768px)");
 
   function handleScreenChange(e) {
     if (e.matches) {
       // Small screen: attach filter on change event
-      categorySelect.addEventListener('change', filterDishes);
+      categorySelect.addEventListener("change", filterDishes);
       filterDishes(); // Run once on load for initial filtering
     } else {
       // Large screen: remove event listener and show all dishes
-      categorySelect.removeEventListener('change', filterDishes);
-      const dishes = document.querySelectorAll('.dish');
-      dishes.forEach(dish => dish.style.display = 'block');
+      categorySelect.removeEventListener("change", filterDishes);
+      const dishes = document.querySelectorAll(".dish");
+      dishes.forEach((dish) => (dish.style.display = "block"));
     }
   }
 
@@ -276,58 +250,38 @@ function showCategory(category, event) {
   handleScreenChange(mediaQuery);
 
   // Listen for screen size changes dynamically
-  mediaQuery.addEventListener('change', handleScreenChange);
+  mediaQuery.addEventListener("change", handleScreenChange);
 }
 
 function setupResponsiveCategoryButtons() {
-  const buttons = document.querySelectorAll('.category-nav button');
+  const buttons = document.querySelectorAll(".category-nav button");
   if (buttons.length === 0) return;
 
-  const mediaQuery = window.matchMedia('(max-width: 768px)');
-
-  function handleScreenChange(e) {
-    if (e.matches) {
-      // Small screen: attach click listeners for filtering
-      buttons.forEach(button => {
-        // Attach handler only if not attached yet
-        if (!button._filterHandler) {
-          button._filterHandler = function(event) {
-            const category = button.getAttribute('data-category') || button.textContent.toLowerCase();
-            showCategory(category, event);
-          };
-          button.addEventListener('click', button._filterHandler);
-        }
+  // Always attach click listeners
+  buttons.forEach((button) => {
+    if (!button.dataset.listenerAttached) {
+      button.addEventListener("click", function (event) {
+        const category =
+          button.getAttribute("data-category") ||
+          button.textContent.toLowerCase();
+        showCategory(category, event);
       });
-      // Show all dishes initially
-      showCategory('all');
-    } else {
-      // Large screen: remove filtering listeners & show all dishes
-      buttons.forEach(button => {
-        if (button._filterHandler) {
-          button.removeEventListener('click', button._filterHandler);
-          delete button._filterHandler;
-        }
-      });
-
-      // Show all dishes
-      const dishes = document.querySelectorAll('.dish');
-      dishes.forEach(dish => dish.style.display = 'block');
-
-      // Remove active class from all buttons
-      buttons.forEach(btn => btn.classList.remove('active'));
+      button.dataset.listenerAttached = "true"; // Prevent double-binding
     }
+  });
+
+  // Still respond to screen size changes for layout/visibility
+  const mediaQuery = window.matchMedia("(max-width: 768px)");
+  function handleScreenChange(e) {
+    // Optional: reset view when switching between views
+    showCategory("all");
   }
 
-  // Run initially
   handleScreenChange(mediaQuery);
-
-  // Listen for screen size changes dynamically
-  mediaQuery.addEventListener('change', handleScreenChange);
+  mediaQuery.addEventListener("change", handleScreenChange);
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  setupResponsiveFilter();        // your existing setup for <select> (can stay if you want)
-  setupResponsiveCategoryButtons();  // add this new one
+window.addEventListener("DOMContentLoaded", () => {
+  setupResponsiveFilter(); // your existing setup for <select> (can stay if you want)
+  setupResponsiveCategoryButtons(); // add this new one
 });
-
-
