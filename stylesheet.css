@@ -627,7 +627,7 @@ footer {
     animation: none;
   }
 
-  .plate3 {
+  .plate2 {
     display: block;
     position: relative;
     margin: 2rem auto;
@@ -635,14 +635,14 @@ footer {
     animation: none;
   }
 
-  .plate3 img {
+  .plate2 img {
     width: 200px;
     border-radius: 50%;
     display: block;
     margin: 0 auto;
   }
 
-  .plate3 .bubble {
+  .plate2 .bubble {
     position: absolute;
     bottom: -10px;
     left: 50%;
