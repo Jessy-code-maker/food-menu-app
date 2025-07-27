@@ -121,7 +121,7 @@ header h1 {
 }
 
 .menu-btn, .order-btn, .dish-button {
-margin: 0.375rem;
+  margin: 0.375rem;
   display: flex;
   border-radius: 20px;
   font-weight: bold;
@@ -314,7 +314,7 @@ a:focus-visible {
   justify-content: center;
   border-radius: 50px;
   background-color: var(--off-white);
-  height: 18.75rem;
+  height: auto;
   padding: 2.5rem;
   max-width: 300px;
   width: 100%;
@@ -676,6 +676,16 @@ footer {
 }
 
 @media screen and (max-width: 581px) {
+  .f-container {
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
+  }
+
+  .f-1, .f-2, .f-3 {
+    width: 100%;
+  }
+
   .main-container {
     flex-direction: column;
     padding: 40px;
@@ -692,13 +702,15 @@ footer {
     width: 100%;
   }
 
-  .f-container {
-    flex-direction: column;
-    gap: 30px;
-    padding: 20px;
+  .dish {
+    padding: 1.5rem;
   }
 
-  .f-1, .f-2, .f-3 {
-    width: 100%;
+  .dish img {
+    border-radius: 10px;
+  }
+
+  .dish-button {
+    padding: 14px;
   }
 }
