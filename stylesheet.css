@@ -677,6 +677,59 @@ footer {
     font-weight: bold;
     margin-right: 0.5rem;
   }
+
+  .container {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .hero-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .hero h2 {
+    font-size: 2rem;
+  }
+
+  .hero-images {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    justify-content: center;
+  }
+
+  .plate {
+    display: none;
+  }
+
+  .plate2 {
+    display: block;
+    position: relative;
+    animation: none;
+  }
+
+  .plate2 img {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 50%;
+  }
+
+  .plate2 .bubble {
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+
 }
 
 @media screen and (max-width: 581px) {
