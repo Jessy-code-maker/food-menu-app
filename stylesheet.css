@@ -171,12 +171,12 @@ a:focus-visible {
 .hero-section {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: center;
   justify-content: center;
   color: var(--text-dark);
   padding: 80px 5%;
   position: relative;
-  min-height: 90vh;
+  min-height: 70vh;
   height: auto;
   background: linear-gradient( 135deg,var(--primary) 0%,var(--accent) 60%,var(--background) 100%);
   animation: slide-in 1s ease-in-out;
@@ -189,7 +189,9 @@ a:focus-visible {
   background: rgba(44, 44, 44, 0.4); /* dark overlay */
   z-index: 0; /* pushs it behind content */
 }
+
 .hero {
+  flex: 1;
   position: relative;
   z-index: 1; /* bring text above the overlay */
   max-width: 600px;
@@ -201,10 +203,27 @@ a:focus-visible {
   font-size: 3rem;
 }
 
-.hero-image {
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /*for small screens */
+}
+
+.hero-images {
+  display: flex;
+  flex: 1;
   position: relative;
   width: 500px;
+  min-width: 300px;
   height: 400px;
+  justify-content: center;
 }
 
 .plate {
@@ -227,7 +246,7 @@ a:focus-visible {
   border: 2px solid var(--primary);
 }
 
-  .bubble::after {
+.bubble::after {
   content: '';
   position: absolute;
   top: -6px;
@@ -236,22 +255,23 @@ a:focus-visible {
   border-width: 6px;
   border-style: solid;
   border-color: var(--primary) transparent transparent transparent;
-  }
+}
 
 .plate1 {
-  top: 10%;
-  right: 30%;
+  top: 0;
+  left: 0;
   animation: animate 3s infinite ease-in-out;
 }
+
 .plate2 {
-  top: 10%;
-  right: 7%;
+  top: 1%;
+  right: 0;
   animation: animate 3s infinite ease-in-out;
 }
 
 .plate3 {
-  bottom: 20%;
-  right: 30%;
+ top: 60%;
+  left: 0;
   animation: animate 3s infinite ease-in-out;
 }
 
@@ -265,8 +285,9 @@ a:focus-visible {
 .f-container {
   display: flex;
   flex-direction:row;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 100px;
+  gap: 40px;
   padding: 50px;
 }
 
@@ -280,7 +301,7 @@ a:focus-visible {
   background-color: var(--fresh-green);
   text-align: center;
   padding: 50px;
-  max-width: 300px;
+  max-width: 420px;
   width: 100%;
   flex-grow: 1;
 }
@@ -411,7 +432,6 @@ a:focus-visible {
   color: white;
   cursor: pointer;
 }
-
 
 .quantity-controls span {
   min-width: 20px;
@@ -621,36 +641,19 @@ footer {
     gap: 40px;
   }
 
-  .plate {
-    display: none;
-    position: static;
-    animation: none;
+ .plate1 {
+   top: 0;
+   left: 0;
   }
 
   .plate2 {
-    display: block;
-    position: relative;
-    margin: 2rem auto;
-    width: fit-content;
-    animation: none;
+  top: 0;
+  right: 0;
   }
 
-  .plate2 img {
-    width: 200px;
-    border-radius: 50%;
-    display: block;
-    margin: 0 auto;
-  }
-
-  .plate2 .bubble {
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 6px 14px;
-    font-size: 13px;
-    white-space: nowrap;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  .plate3 {
+  bottom: 0;
+  left: 0;
   }
 
   .category-nav {
@@ -712,5 +715,37 @@ footer {
 
   .dish-button {
     padding: 14px;
+  }
+
+    .plate {
+    display: none;
+    position: static;
+    animation: none;
+  }
+
+  .plate2 {
+    display: block;
+    position: relative;
+    margin: 2rem auto;
+    width: fit-content;
+    animation: none;
+  }
+
+  .plate2 img {
+    width: 200px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .plate2 .bubble {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 6px 14px;
+    font-size: 13px;
+    white-space: nowrap;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 }
