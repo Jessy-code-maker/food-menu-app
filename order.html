@@ -30,7 +30,7 @@
       </header>
     </div>
 
-    <h1>Restaurant Menu</h1>
+    <h1>Menu</h1>
     
     <!-- CATEGORY NAVIGATION -->
     <!-- Responsive Dropdown Filter for Small Screens -->
@@ -42,6 +42,7 @@
         <option value="rice">Rice Dishes</option>
         <option value="grilled">Grilled</option>
         <option value="swallow">Swallow & Soups</option>
+        <option value="desserts">Desserts</option>
       </select>
     </div>
     <!-- Responsive button Filter for Large Screens -->
@@ -51,6 +52,7 @@
       <button data-category="rice">Rice Dishes</button>
       <button data-category="grilled">Grilled</button>
       <button data-category="swallow">Swallow & Soups</button>
+      <button data-category="desserts">Desserts</button>
     </div>
 
     <!-- MENU ITEMS -->
@@ -62,7 +64,7 @@
           <p>Assorted Meat</p>
           <p>Price: ₦4500.00</p>
           <button class="dish-button"
-            onclick="addToOrder('Pepper Soup', 8, 'pepper_soup.jpg')">
+            onclick="addToPlate('Pepper Soup', 4500, 'pepper_soup.jpg')">
             Add to Plate
           </button>
         </div>
@@ -73,7 +75,7 @@
           <p>Price: ₦3000.00</p>
           <button
             class="dish-button"
-            onclick="addToOrder('Suya', 10, 'suya.jpg')">
+            onclick="addToPlate('Suya', 3000, 'suya.jpg')">
             Add to Plate
           </button>
         </div>
@@ -84,7 +86,7 @@
           <p>Price: ₦2550.50</p>
           <button
             class="dish-button"
-            onclick="addToOrder('Rice & Beans', 7.5, 'rice and beans.jpg')">
+            onclick="addToPlate('Rice & Beans', 2550.50, 'rice and beans.jpg')">
             Add to Plate
           </button>
         </div>
@@ -95,7 +97,7 @@
           <p>Price: ₦3000.00</p>
           <button
             class="dish-button"
-            onclick="addToOrder('White Rice & Stew', 7, 'White-Rice-Stew.jpg')">
+            onclick="addToPlate('White Rice & Stew', 3000, 'White-Rice-Stew.jpg')">
             Add to Plate
           </button>
         </div>
@@ -106,7 +108,7 @@
           <p>Price: ₦2800.00</p>
           <button
             class="dish-button"
-            onclick="addToOrder('Jollof Rice', 9, 'jollof_rice.jpg')">
+            onclick="addToPlate('Jollof Rice', 2800, 'jollof_rice.jpg')">
             Add to Plate
           </button>
         </div>
@@ -117,7 +119,18 @@
           <p>Price: ₦2500.00</p>
           <button
             class="dish-button"
-            onclick="addToOrder('Egusi Soup', 11, 'Egusi.jpg')">
+            onclick="addToPlate('Egusi Soup', 2500, 'Egusi.jpg')">
+            Add to Plate
+          </button>
+        </div>
+       <div class="dish" data-category="desserts">
+          <img src="puffs.jpg" alt="puff_puff" />
+          <h3>Puff puff</h3>
+          <p>Fried dough balls with powdered sugar.</p>
+          <p>Price: ₦500.00</p>
+          <button
+            class="dish-button"
+            onclick="addToPlate('puff_puff', 500, 'puffs.jpg')">
             Add to Plate
           </button>
         </div>

@@ -10,10 +10,10 @@ menuToggle.addEventListener("change", () => {
   }
 });
 
-// This script handles adding items to the order, updating quantities, and submitting payment
+// This script handles adding items to the order and updating quantities
 let cart = {};
 
-function addToOrder(name, price, image) {
+function addToPlate(name, price, image) {
   if (!cart[name]) {
     cart[name] = { price, quantity: 1, image };
   } else {
@@ -37,6 +37,7 @@ function changeQuantity(name, amount) {
   }
 }
 
+//This script handles Checkout 
 function renderCart() {
   const checkout = document.getElementById("checkout");
   const checkoutContainer = document.querySelector(".c-container");
@@ -64,7 +65,7 @@ function renderCart() {
       <img src="${image}" alt="${item}">
       <div class="item-details">
         <strong>${item}</strong><br>
-        ₦${price.toFixed(2)} x ${quantity} = ₦${itemTotal.toFixed(2)}
+        ₦${price.toFixed(2)}
         <div class="quantity-controls">
           <button onclick="changeQuantity('${item}', -1)">−</button>
           <span>${quantity}</span>
@@ -88,14 +89,14 @@ function renderCart() {
   document.getElementById("total").textContent = total.toFixed(2);
 }
 
+// Payment form handling
+// This function handles the payment form submission, validates input, and displays a receipt
 function toggleCardFields() {
   const method = document.getElementById("payment-method").value;
   const cardSection = document.getElementById("card-fields");
   cardSection.style.display = method === "card" ? "block" : "none";
 }
 
-// Payment form handling
-// This function handles the payment form submission, validates input, and displays a receipt
 function submitPayment(event) {
   event.preventDefault();
 
@@ -165,7 +166,7 @@ function submitPayment(event) {
     document.getElementById("receipt-preview").innerHTML = receiptHtml;
     showModal();
 
-    // Optionally clear form or redirect
+    //clears form
     // This resets the payment form and cart, allowing the user to start a new order
     document.getElementById("payment-form").reset();
     toggleCardFields();
@@ -188,6 +189,7 @@ function printReceipt() {
 }
 
 //category filtering
+// Filter dishes by category
 function showCategory(category, event) {
   const dishes = document.querySelectorAll(".dish");
   const buttons = document.querySelectorAll(".category-nav button");
@@ -214,7 +216,6 @@ window.onload = function () {
   }
 };
 
-// Filter dishes by category
 function filterDishes() {
   const selectedCategory = document.getElementById("category-select").value;
   const dishes = document.querySelectorAll(".dish");
@@ -246,10 +247,8 @@ function setupResponsiveFilter() {
     }
   }
 
-  // Initial check
-  handleScreenChange(mediaQuery);
-
   // Listen for screen size changes dynamically
+  handleScreenChange(mediaQuery);
   mediaQuery.addEventListener("change", handleScreenChange);
 }
 
@@ -263,25 +262,19 @@ function setupResponsiveCategoryButtons() {
       button.addEventListener("click", function (event) {
         const category =
           button.getAttribute("data-category") ||
-          button.textContent.toLowerCase();
+          button.textContent();
         showCategory(category, event);
       });
       button.dataset.listenerAttached = "true"; // Prevent double-binding
     }
   });
 
-  // Still respond to screen size changes for layout/visibility
-  const mediaQuery = window.matchMedia("(max-width: 768px)");
-  function handleScreenChange(e) {
-    // Optional: reset view when switching between views
-    showCategory("all");
-  }
-
+  // Listen for screen size changes dynamically
   handleScreenChange(mediaQuery);
   mediaQuery.addEventListener("change", handleScreenChange);
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  setupResponsiveFilter(); // your existing setup for <select> (can stay if you want)
-  setupResponsiveCategoryButtons(); // add this new one
+  setupResponsiveFilter();
+  setupResponsiveCategoryButtons();
 });

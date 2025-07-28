@@ -176,7 +176,7 @@ a:focus-visible {
   color: var(--text-dark);
   padding: 80px 5%;
   position: relative;
-  min-height: 70vh;
+  min-height: 50vh;
   height: auto;
   background: linear-gradient( 135deg,var(--primary) 0%,var(--accent) 60%,var(--background) 100%);
   animation: slide-in 1s ease-in-out;
@@ -332,6 +332,7 @@ a:focus-visible {
   border-radius: 50px;
   background-color: var(--off-white);
   height: auto;
+  max-height: max-content;
   padding: 2.5rem;
   max-width: 300px;
   width: 100%;
